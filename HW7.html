@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+
+		body{
+			display: flex;
+		}
+
+        .left-panel {
+        	width: 330px;
+        	height: 900px;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #3b3a41;
+            color: #ffffff;
+        }
+
+
+        .right-panel {
+        	width: 540px;
+        	height: 900px;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f6f7fa;
+            color: #333333;
+            a{text-decoration: none; color: gray;}
+    		a:hover{text-decoration: none; color: lightblue;}
+        }
+
+        .photo-panel{
+        	background-position: center;
+        	height: 450px;
+        	width: 330px;
+        }
+
+        .text-contain{
+        	background-color: black;
+        	width: 330px;
+        	height: 450px;
+        }
+
+        .text{
+        	text-align: left;
+        	padding: 0 20px;
+        	font-family: Lucida Console;
+      	}
+
+      	.title{
+    		height: 300px;
+    		padding: 0 20px;
+    		unicode-bidi: isolate;
+      	}
+
+      	.music{
+      		display: flex;
+      	}
+
+	</style>
+</head>
+<body>
+	<div class="left-panel">
+		<div class="photo-panel">
+			<img src="me.jpg" width="330px" height="450px">
+		</div>
+		<div class="text-contain">
+			<h1 id = "name">何凱榆</h1>
+        	<button id="edit-btn">Edit</button>
+			<h3 class="text">ABOUT ME</h3>
+			<p class="text">I am a freshman in the Department of Managment Information Systems at NCCU. I am interested in programming. I have experience in writing Java.</p>
+			<h3 class="text">CONTACT</h3>
+			<p class="text">113306078@g.nccu.edu.tw</p>
+			<br><img src="logo.jpg" width="250px"
+			height="100px"></br>
+		</div>
+	</div>
+	<div class="right-panel">
+		<div class="title">
+			<h2 class="text">Education<hr width="450px"></h2>
+			<p class="text">2024.9 ~ now<br>NCCU, Department of MIS</p>
+			<p class="text">2021.9 ~ 2024.8<br>Taichung First Senior High School<br>Particepated in school basketball team</p>
+			<p class="text">2018 ~ 2021.8<br>Junior High School</p>
+		</div>
+		<div class="title">
+			<h2 class="text">Homework List<hr width="450px"></h2>
+			<p class="text">HW1-- <a href="https://github.com/113306078/HW1.git">https://github.com/113306078/HW1.git</a></p>
+			<p class="text">HW2-- <a href="https://github.com/113306078/HW2.git">https://github.com/113306078/HW2.git</a></p>
+			<p class="text">HW3-- <a href="https://github.com/113306078/HW3.git">https://github.com/113306078/HW3.git</a></p>
+			<p class="text">HW4-- <a href="https://github.com/113306078/113306078_HW4.git">https://github.com/113306078/113306078_HW4.git</a></p>
+		</div>
+		<div class="title">
+			<h2 class="text">Favorite Music<hr width="450px"></h2>
+			<button id="add-btn">add</button>
+			<div id="music-list">
+        	<label for="musicUrl">音樂連結：</label>
+        	<input type="text" id="musicUrl" placeholder="輸入音樂連結"><br><br>
+        	<label for="musicName">音樂名稱：</label>
+        	<input type="text" id="musicName" placeholder="輸入音樂名稱"><br><br>
+        	<button id="submitMusicBtn">提交</button>
+        	<p id="formAlert" class="alert"></p>
+    		</div>
+			<div class="music">
+			<ul><a href= "https://www.youtube.com/watch?v=812omgU1tHs">
+					<img src="YT.jpg" width="50" height="35">
+					<br>愛愛愛
+			</ul>
+			<ul><a href= "https://www.youtube.com/watch?v=6DZP818d0Po">
+					<img src="YT.jpg" width="50" height="35">
+					<br>夢醒時分
+			</ul>
+			<ul><a href= "https://www.youtube.com/watch?v=oyQZg2X_cd0">
+					<img src="YT.jpg" width="50" height="35">
+					<br>國境之南
+			</ul>
+			<ul><a href= "https://www.youtube.com/watch?v=Iw3WgP8A18I">
+					<img src="YT.jpg" width="50" height="35">
+					<br>K歌之王
+			</ul>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const nameElement = document.getElementById('name');
+    	const editBtn = document.getElementById('edit-btn');
+
+    	editBtn.addEventListener('click', () => {
+        if (editBtn.textContent === 'Edit') {
+            const currentName = nameElement.textContent;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentName;
+            nameElement.textContent = '';
+            nameElement.appendChild(input);
+            editBtn.textContent = 'Save';
+        } else {
+            const input = nameElement.querySelector('input');
+            if (input) {
+                nameElement.textContent = input.value;
+                editBtn.textContent = 'Edit';
+            }
+        }
+    });
+
+    const addBtn = document.getElementById('add-btn');
+    const musicList = document.getElementById('music-list');
+
+    addBtn.addEventListener('click', () => {
+        const form = document.createElement('div');
+
+        const linkInput = document.createElement('input');
+        linkInput.type = 'url';
+        linkInput.placeholder = 'Music Link';
+        form.appendChild(linkInput);
+
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.placeholder = 'Music Name';
+        form.appendChild(nameInput);
+
+        const submitBtn = document.createElement('button');
+        submitBtn.textContent = 'Submit';
+        form.appendChild(submitBtn);
+
+        addBtn.disabled = true;
+        document.body.appendChild(form);
+
+        submitBtn.addEventListener('click', () => {
+            const link = linkInput.value.trim();
+            const musicName = nameInput.value.trim();
+
+            if (link && musicName) {
+                const musicItem = document.createElement('div');
+                musicItem.classList.add('music-item');
+
+                const musicLink = document.createElement('a');
+                musicLink.href = link;
+                musicLink.target = '_blank';
+
+                const musicImage = document.createElement('img');
+                musicImage.src = "YT.jpg";
+                musicLink.appendChild(musicImage);
+
+                const musicText = document.createElement('span');
+                musicText.textContent = musicName;
+
+                musicItem.appendChild(musicLink);
+                musicItem.appendChild(musicText);
+                musicList.appendChild(musicItem);
+
+                document.body.removeChild(form);
+                addBtn.disabled = false;
+            } else {
+                alert('Please fill out all fields!');
+            }
+        });
+    });
+
+	</script>
+</body>
+</html>
